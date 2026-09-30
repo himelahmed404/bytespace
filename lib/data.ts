@@ -123,3 +123,43 @@ export const categoryTabRows: string[][] = [
   ],
   ["Productivity", "Web Development", "Data Science", "Cooking"],
 ];
+
+/* ------------------------------------------------------------------------------------------ */
+/* Learning paths                                                                              */
+/* ------------------------------------------------------------------------------------------ */
+
+export type LearningPath = {
+  label: string;
+  icon: string;
+  /** Course tab to open when the path is clicked. */
+  courseCategory: string;
+};
+
+export const learningPaths: LearningPath[] = [
+  { label: "Design", icon: "/images/icons/categories/design.svg", courseCategory: "UI/UX Design" },
+  {
+    label: "Development",
+    icon: "/images/icons/categories/development.svg",
+    courseCategory: "Web Development",
+  },
+  {
+    label: "IT & Software",
+    icon: "/images/icons/categories/it-software.svg",
+    courseCategory: "Data Science",
+  },
+  {
+    label: "Business",
+    icon: "/images/icons/categories/business.svg",
+    courseCategory: "Freelance & Entrepreneurship",
+  },
+  {
+    label: "Marketing",
+    icon: "/images/icons/categories/marketing.svg",
+    courseCategory: "Marketing",
+  },
+  {
+    label: "Photography",
+    icon: "/images/icons/categories/photography.svg",
+    courseCategory: "Photography",
+  },
+];

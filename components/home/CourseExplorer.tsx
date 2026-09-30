@@ -1,10 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CourseCard } from "@/components/cards/CourseCard";
 import { CategoryTabs } from "@/components/home/CategoryTabs";
 import { Button } from "@/components/ui/Button";
+import { COURSE_FILTER_EVENT } from "@/lib/courseFilter";
 import { categoryTabRows, courses, FEATURED } from "@/lib/data";
 
 const easeOutQuint = [0.22, 1, 0.36, 1] as const;
@@ -12,6 +13,14 @@ const easeOutQuint = [0.22, 1, 0.36, 1] as const;
 /** Category tabs + the course grid they filter. */
 export function CourseExplorer() {
   const [active, setActive] = useState(FEATURED);
+
+  // Other sections (e.g. learning-path cards) can open a category via `showCoursesIn()`.
+  useEffect(() => {
+    const onFilter = (event: Event) => setActive((event as CustomEvent<string>).detail);
+    window.addEventListener(COURSE_FILTER_EVENT, onFilter);
+    return () => window.removeEventListener(COURSE_FILTER_EVENT, onFilter);
+  }, []);
+
   const visible =
     active === FEATURED ? courses : courses.filter((c) => c.categories.includes(active));
 
