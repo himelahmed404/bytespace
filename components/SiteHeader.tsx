@@ -3,12 +3,7 @@ import Link from "next/link";
 import { MobileMenu } from "@/components/MobileMenu";
 import { Logo } from "@/components/ui/Logo";
 import { cn } from "@/lib/cn";
-
-const mainNav = [
-  { label: "Home", href: "/" },
-  { label: "Courses", href: "#courses" },
-  { label: "Creators", href: "#creators" },
-];
+import { mainNav } from "@/lib/navigation";
 
 const linkClass = "text-gray-50 transition-colors duration-200 hover:text-lime";
 

@@ -1,19 +1,22 @@
-import { ProgressBar } from "@/components/ui/ProgressBar";
+import { ProgressStat } from "@/components/ui/ProgressStat";
 import { cn } from "@/lib/cn";
 
 type ProgressCardProps = {
   label?: string;
   /** Percentage, 0–100. */
   value: number;
+  /** Seconds before the count-up starts once visible (lets the card land first). */
+  countDelay?: number;
   /** Extra classes for the label, e.g. `leading-6` (the Growth section uses a taller line). */
   labelClassName?: string;
   className?: string;
 };
 
-/** White stat card with a big percentage and an animated progress bar. */
+/** White stat card: the percentage counts up from 0 while the bar fills beneath it. */
 export function ProgressCard({
   label = "Learning Progress",
   value,
+  countDelay,
   labelClassName,
   className,
 }: ProgressCardProps) {
@@ -25,10 +28,7 @@ export function ProgressCard({
       )}
     >
       <p className={cn("text-label-s font-medium text-ink", labelClassName)}>{label}</p>
-      <p className="w-[200px] font-heading text-[48px] leading-[58px] font-semibold tracking-[-0.01em] text-ink">
-        {value}%
-      </p>
-      <ProgressBar value={value} label={label} className="w-[200px]" />
+      <ProgressStat value={value} label={label} delay={countDelay} />
     </div>
   );
 }

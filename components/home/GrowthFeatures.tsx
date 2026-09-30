@@ -81,7 +81,7 @@ export function GrowthFeatures() {
               enter={0.3}
               float={{ duration: 5, delay: 0.2, distance: -10 }}
             >
-              <ProgressCard value={55} labelClassName="leading-6" />
+              <ProgressCard value={55} countDelay={0.7} labelClassName="leading-6" />
             </FloatingCard>
             <FloatingOrnament
               shape="coil"
@@ -144,7 +144,7 @@ export function GrowthFeatures() {
               enter={0.35}
               float={{ duration: 5.5, delay: 0.8, distance: -10 }}
             >
-              <HappyStudentsCard compact />
+              <HappyStudentsCard compact dealDelay={0.3} />
             </FloatingCard>
             <FloatingOrnament
               shape="zigzag"

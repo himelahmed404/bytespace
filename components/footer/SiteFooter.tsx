@@ -40,7 +40,7 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col gap-3 border-t border-gray-200 pt-[22px] text-[12px] leading-[19px] text-ink sm:flex-row sm:items-start sm:justify-between">
-          <p>@ 2023 ByteSpace. All rights reserved.</p>
+          <p>© 2023 ByteSpace. All rights reserved.</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {legalLinks.map((link) => (
               <li key={link.label}>

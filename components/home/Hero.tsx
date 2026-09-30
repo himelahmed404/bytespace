@@ -143,7 +143,7 @@ export function Hero() {
               alt="Smiling student wearing headphones and holding a laptop"
               width={578}
               height={541}
-              sizes="(min-width: 1024px) 578px, 40vw"
+              sizes="(min-width: 1024px) 578px, 60vw"
               quality={90}
               loading="eager"
               fetchPriority="high"
@@ -157,7 +157,7 @@ export function Hero() {
             enter={1}
             float={{ duration: 5, delay: 0.4, distance: -10 }}
           >
-            <ProgressCard value={55} />
+            <ProgressCard value={55} countDelay={1.5} />
           </FloatingCard>
 
           <FloatingCard
@@ -166,7 +166,7 @@ export function Hero() {
             enter={1.1}
             float={{ duration: 5.5, delay: 1.2, distance: -10 }}
           >
-            <HappyStudentsCard />
+            <HappyStudentsCard dealDelay={0.3} />
           </FloatingCard>
 
           {ornaments.map(({ desktopOnly, ...o }, i) => (

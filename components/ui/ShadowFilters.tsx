@@ -19,7 +19,7 @@ const shadowA = [
   { x: 51.038, y: 72.912, blur: 72, alpha: 0.13 },
 ];
 
-/** Renders the shared SVG filter definitions once (in the root layout). */
+/** Renders the shared SVG filter definitions once (in the root layout): shadow A + goo. */
 export function ShadowFilters() {
   return (
     <svg aria-hidden width="0" height="0" className="absolute">
@@ -45,6 +45,28 @@ export function ShadowFilters() {
           ))}
           <feMergeNode in="SourceGraphic" />
         </feMerge>
+      </filter>
+
+      {/*
+        "Gooey" filter for liquid merges: blur, then sharpen the alpha so nearby shapes fuse with
+        a watery bridge. Compositing the source on top keeps the shapes themselves crisp.
+      */}
+      <filter
+        id="goo"
+        x="-10%"
+        y="-60%"
+        width="120%"
+        height="220%"
+        colorInterpolationFilters="sRGB"
+      >
+        <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
+        <feColorMatrix
+          in="blur"
+          mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"
+          result="goo"
+        />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
       </filter>
     </svg>
   );

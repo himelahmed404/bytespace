@@ -1,6 +1,7 @@
 import { TestimonialCard } from "@/components/cards/TestimonialCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { GlowBlob } from "@/components/ui/GlowBlob";
+import { SwipeList } from "@/components/ui/SwipeList";
 import { testimonials } from "@/lib/data";
 
 /** Soft background glows, positioned on the 1440px Figma frame. */
@@ -43,18 +44,25 @@ export function Testimonials() {
           </Reveal>
         </div>
 
-        <ul className="grid gap-6 md:grid-cols-2 xl:flex xl:items-start xl:gap-[41px]">
-          {testimonials.map((t, i) => (
-            <li
-              key={t.name}
-              className="md:last:col-span-2 md:last:w-[calc(50%-12px)] md:last:justify-self-center xl:last:w-auto"
-            >
-              <Reveal y={40} delay={i * 0.12} duration={0.7}>
-                <TestimonialCard testimonial={t} />
-              </Reveal>
-            </li>
-          ))}
-        </ul>
+        {/* Phones: swipeable carousel with dots · ≥768px: grid · ≥1280px: the design's row */}
+        <div>
+          <SwipeList
+            label="Testimonials"
+            dotsClassName="md:hidden"
+            className="-mx-4 flex snap-x snap-mandatory [scrollbar-width:none] gap-4 overflow-x-auto overflow-y-hidden px-4 pb-2 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 xl:flex xl:items-start xl:gap-[41px] [&::-webkit-scrollbar]:hidden"
+          >
+            {testimonials.map((t, i) => (
+              <li
+                key={t.name}
+                className="w-[85%] shrink-0 snap-center md:w-auto md:last:col-span-2 md:last:w-[calc(50%-12px)] md:last:justify-self-center xl:last:w-auto"
+              >
+                <Reveal y={40} delay={i * 0.12} duration={0.7} className="h-full">
+                  <TestimonialCard testimonial={t} />
+                </Reveal>
+              </li>
+            ))}
+          </SwipeList>
+        </div>
       </div>
     </section>
   );

@@ -226,21 +226,21 @@ export const footerColumns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Browse",
     links: [
-      { label: "Featured Courses", href: "#courses", courseCategory: FEATURED },
-      { label: "Featured Categories", href: "#categories" },
-      { label: "Business", href: "#courses", courseCategory: "Freelance & Entrepreneurship" },
-      { label: "IT", href: "#courses", courseCategory: "Data Science" },
-      { label: "Design", href: "#courses", courseCategory: "UI/UX Design" },
+      { label: "Featured Courses", href: "/#courses", courseCategory: FEATURED },
+      { label: "Featured Categories", href: "/#categories" },
+      { label: "Business", href: "/#courses", courseCategory: "Freelance & Entrepreneurship" },
+      { label: "IT", href: "/#courses", courseCategory: "Data Science" },
+      { label: "Design", href: "/#courses", courseCategory: "UI/UX Design" },
     ],
   },
   {
     title: "Categories",
     links: [
-      { label: "Development", href: "#courses", courseCategory: "Web Development" },
-      { label: "Marketing", href: "#courses", courseCategory: "Marketing" },
-      { label: "Photography", href: "#courses", courseCategory: "Photography" },
-      { label: "Finance", href: "#courses", courseCategory: "Freelance & Entrepreneurship" },
-      { label: "Sport", href: "#categories" },
+      { label: "Development", href: "/#courses", courseCategory: "Web Development" },
+      { label: "Marketing", href: "/#courses", courseCategory: "Marketing" },
+      { label: "Photography", href: "/#courses", courseCategory: "Photography" },
+      { label: "Finance", href: "/#courses", courseCategory: "Freelance & Entrepreneurship" },
+      { label: "Sport", href: "/#categories" },
     ],
   },
   {

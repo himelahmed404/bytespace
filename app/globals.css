@@ -15,7 +15,8 @@
   --color-gray-50: #f5f5f6;
   --color-gray-100: #e5e6e8;
   --color-gray-200: #ced0d3;
-  --color-gray-400: #82868e;
+  /* Figma uses #82868e; darkened slightly (same hue) to meet WCAG AA contrast (4.75:1 on white) */
+  --color-gray-400: #70737a;
   --color-gray-700: #4b4c53;
   --color-gray-800: #424348;
   --color-ink: #242528; /* Shuttle Gray/950 */
@@ -104,6 +105,24 @@
       /* Not 0: Chrome ignores fully transparent elements for LCP, which would delay it */
       opacity: 0.01;
       transform: translate3d(0, 28px, 0);
+    }
+  }
+
+  /* Breathing lime glow on the search button once it has merged into the bar (box-shadow only,
+     so it never fights the button's own motion transforms). */
+  --animate-glow-pulse: glow-pulse 1.8s ease-in-out infinite;
+
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 0 rgb(212 251 32 / 0.55),
+        0 0 14px 2px rgb(212 251 32 / 0.35);
+    }
+    50% {
+      box-shadow:
+        0 0 0 7px rgb(212 251 32 / 0),
+        0 0 26px 8px rgb(212 251 32 / 0.6);
     }
   }
 

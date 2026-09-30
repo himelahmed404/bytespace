@@ -67,7 +67,7 @@ export function NewsletterForm() {
             {status === "idle" ? "" : messages[status]}
           </p>
         </div>
-        <Button type="submit">Search</Button>
+        <Button type="submit">Subscribe</Button>
       </form>
       <p className="text-[12px] leading-[19px] text-ink">
         By subscribing, you agree to our Privacy Policy and consent to receive updates from our

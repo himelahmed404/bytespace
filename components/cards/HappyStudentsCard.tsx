@@ -7,11 +7,17 @@ const avatars = Array.from({ length: 7 }, (_, i) => `/images/avatars/student-${i
 type HappyStudentsCardProps = {
   /** Smaller rating line (10px, bold score) and a taller title line — used below the hero. */
   compact?: boolean;
+  /** Seconds before the avatars deal out of their pile (lets the card land first). */
+  dealDelay?: number;
   className?: string;
 };
 
 /** "Happy Students" social-proof card: rating + stack of student avatars. */
-export function HappyStudentsCard({ compact = false, className }: HappyStudentsCardProps) {
+export function HappyStudentsCard({
+  compact = false,
+  dealDelay = 0.4,
+  className,
+}: HappyStudentsCardProps) {
   return (
     <div
       className={cn(
@@ -49,6 +55,7 @@ export function HappyStudentsCard({ compact = false, className }: HappyStudentsC
         size={43}
         overlap={16}
         label="Over 2,000 happy students"
+        dealIn={{ delay: dealDelay }}
         more={{
           label: "2K+",
           badgeSrc: "/images/icons/badge-lime.svg",

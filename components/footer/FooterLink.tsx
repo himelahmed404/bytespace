@@ -9,7 +9,8 @@ import type { FooterLink as FooterLinkData } from "@/lib/data";
 /** Footer link; category links also open the course grid on that category. */
 export function FooterLink({ link, className }: { link: FooterLinkData; className?: string }) {
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
-    if (!link.courseCategory) return;
+    // Only intercept on the landing page; elsewhere (e.g. the 404 page) just follow the link.
+    if (!link.courseCategory || !document.getElementById("courses")) return;
     event.preventDefault();
     showCoursesIn(link.courseCategory);
   }
