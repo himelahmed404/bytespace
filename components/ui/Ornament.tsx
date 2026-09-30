@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 
-export type OrnamentShape = "zigzag" | "coil" | "torus" | "cylinder" | "pyramid";
+export type OrnamentShape = "zigzag" | "coil" | "torus" | "cylinder" | "pyramid" | "cone";
 
 /** Tints used across the site. */
 export const ORNAMENT_TINT = {

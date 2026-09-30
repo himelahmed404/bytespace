@@ -16,7 +16,8 @@ export type FloatingOrnamentProps = {
   /** Starting tilt for the entrance, in degrees. */
   enterRotate?: number;
   float: { duration: number; delay: number; distance: number; rotate: number };
-  trigger?: "mount" | "view";
+  /** See `Reveal` — use `parent` inside a `RevealGroup`. */
+  trigger?: "mount" | "view" | "parent";
   className?: string;
 };
 

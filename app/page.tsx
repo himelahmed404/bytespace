@@ -1,3 +1,4 @@
+import { CreatorCta } from "@/components/home/CreatorCta";
 import { DiscoverCourses } from "@/components/home/DiscoverCourses";
 import { GrowthFeatures } from "@/components/home/GrowthFeatures";
 import { Hero } from "@/components/home/Hero";
@@ -12,6 +13,7 @@ export default function Home() {
       <DiscoverCourses />
       <LearningPaths />
       <GrowthFeatures />
+      <CreatorCta />
     </main>
   );
 }
