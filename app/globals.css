@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — taken from the ByteSpace Figma styles.
+ * Color names follow the Figma palette (Persian Blue, Electric Lime, Shuttle Gray…).
+ */
+@theme {
+  /* Brand */
+  --color-primary: #003be2; /* Persian Blue/800 */
+  --color-lime: #d4fb20; /* Electric Lime/400 */
+  --color-violet-950: #300b6a; /* Electric Violet/950 */
+
+  /* Neutrals — Shuttle Gray */
+  --color-gray-50: #f5f5f6;
+  --color-gray-100: #e5e6e8;
+  --color-gray-200: #ced0d3;
+  --color-gray-400: #82868e;
+  --color-gray-700: #4b4c53;
+  --color-gray-800: #424348;
+  --color-ink: #242528; /* Shuttle Gray/950 */
+
+  /* Neutrals — Black */
+  --color-black-200: #d1d1d1;
+  --color-black-400: #888888;
+  --color-black-700: #4f4f4f;
+
+  /* Fonts (CSS variables are injected by next/font in app/layout.tsx) */
+  --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-clash-display), var(--font-poppins), sans-serif;
+
+  /* Type scale — Figma text styles */
+  --text-heading-m: 44px;
+  --text-heading-m--line-height: 1.2;
+  --text-heading-m--letter-spacing: -0.01em;
+  --text-heading-xs: 20px;
+  --text-heading-xs--line-height: 28px;
+  --text-heading-xs--letter-spacing: -0.01em;
+  --text-body-l: 18px;
+  --text-body-l--line-height: 1.6;
+  --text-body-m: 16px;
+  --text-body-m--line-height: 1.6;
+  --text-body-xs: 12px;
+  --text-body-xs--line-height: 20px;
+  --text-label-l: 18px;
+  --text-label-l--line-height: 1.2;
+  --text-label-s: 14px;
+  --text-label-s--line-height: 1.2;
+  --text-label-xs: 12px;
+  --text-label-xs--line-height: 20px;
+
+  /* Radii */
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Layout */
+  --container-page: 1200px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+/* Centered 1200px page container with side gutters on small screens */
+@utility container-page {
+  @apply mx-auto w-full max-w-page px-4 sm:px-6 xl:px-0;
+}
