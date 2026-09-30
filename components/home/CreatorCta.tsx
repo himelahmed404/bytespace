@@ -81,21 +81,21 @@ export function CreatorCta() {
   return (
     <section
       aria-labelledby="creator-cta-title"
-      className="relative isolate h-[488px] overflow-hidden bg-primary"
+      className="relative isolate overflow-hidden bg-primary py-16 sm:py-20 xl:h-[488px] xl:pt-[85px] xl:pb-0"
     >
       <GridBackground rows={REGULAR_GRID_ROWS} />
 
-      <div className="relative container-page flex flex-col items-center gap-10 pt-[85px] text-center">
+      <div className="relative container-page flex flex-col items-center gap-8 text-center sm:gap-10">
         <Reveal>
           <h2
             id="creator-cta-title"
-            className="max-w-[710px] font-heading text-heading-m font-semibold text-gray-50"
+            className="max-w-[710px] font-heading text-[30px]/9 font-semibold tracking-[-0.01em] text-gray-50 max-lg:text-balance sm:text-[36px]/[43px] lg:text-heading-m"
           >
             Unlock Your Potential as a Creator with ByteSpace
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="max-w-[964px] text-body-l text-gray-50">
+          <p className="max-w-[964px] text-body-m text-gray-50 sm:text-body-l">
             Experience the collaboration of numerous creators and an expanding selection of courses.
             Register now and become a part of a community comprising over 10,000 local and
             international creators. Utilize our Course Editor, and showcase your expertise by

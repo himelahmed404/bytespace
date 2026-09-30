@@ -15,7 +15,7 @@ export function TestimonialCard({
   return (
     <figure
       className={cn(
-        "flex w-[374px] flex-col gap-6 rounded-xl bg-white p-6 transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-24px_rgb(4_8_25/0.2)]",
+        "flex h-full w-full flex-col gap-6 rounded-xl bg-white p-6 transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-24px_rgb(4_8_25/0.2)] xl:h-auto xl:w-[374px]",
         className,
       )}
     >

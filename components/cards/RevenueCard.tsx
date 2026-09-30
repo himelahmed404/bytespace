@@ -41,7 +41,7 @@ export function RevenueCard({
     >
       <div>
         <p className="text-label-m font-medium">{title}</p>
-        <p className="text-[10px] leading-[1.2]">{period}</p>
+        <p className="text-[10px] leading-[12px]">{period}</p>
       </div>
       {progress === undefined ? (
         <>
@@ -54,7 +54,12 @@ export function RevenueCard({
             {amountEl}
             <ChangeBadge>{change}</ChangeBadge>
           </div>
-          <ProgressBar value={progress} track="bg-white" className="w-[200px]" />
+          <ProgressBar
+            value={progress}
+            label={`${title} goal`}
+            track="bg-white"
+            className="w-[200px]"
+          />
         </>
       )}
     </div>

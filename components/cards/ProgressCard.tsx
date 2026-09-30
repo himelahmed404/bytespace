@@ -25,10 +25,10 @@ export function ProgressCard({
       )}
     >
       <p className={cn("text-label-s font-medium text-ink", labelClassName)}>{label}</p>
-      <p className="w-[200px] font-heading text-[48px] leading-[1.2] font-semibold tracking-[-0.01em] text-ink">
+      <p className="w-[200px] font-heading text-[48px] leading-[58px] font-semibold tracking-[-0.01em] text-ink">
         {value}%
       </p>
-      <ProgressBar value={value} className="w-[200px]" />
+      <ProgressBar value={value} label={label} className="w-[200px]" />
     </div>
   );
 }

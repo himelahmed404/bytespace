@@ -23,15 +23,20 @@ export function SectionHeading({
     <div className={cn("flex flex-col items-center gap-4 text-center", className)}>
       <h2
         className={cn(
-          "font-heading font-semibold text-navy",
-          size === "m" ? "text-heading-m" : "text-heading-s",
+          // Balanced wrapping below 1024px avoids a lone last word; desktop keeps Figma's breaks
+          "font-heading font-semibold text-navy max-lg:text-balance",
+          size === "m"
+            ? "text-[30px]/9 tracking-[-0.01em] sm:text-[36px]/[43px] lg:text-heading-m"
+            : "text-[26px]/8 tracking-[-0.01em] sm:text-heading-s",
           titleClassName,
         )}
       >
         {title}
       </h2>
       {/* Figma box is 917px; Chrome measures text ~0.5% wider, so allow slack to keep Figma's line breaks */}
-      {description && <p className="max-w-[926px] text-body-l text-gray-400">{description}</p>}
+      {description && (
+        <p className="max-w-[926px] text-body-m text-gray-400 sm:text-body-l">{description}</p>
+      )}
     </div>
   );
 }

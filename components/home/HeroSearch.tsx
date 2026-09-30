@@ -12,8 +12,12 @@ export function HeroSearch() {
   }
 
   return (
-    <form role="search" onSubmit={handleSubmit} className="flex items-start gap-4">
-      <label className="flex h-[52px] w-[461px] items-center gap-2 rounded-xl bg-white px-6 py-3 transition-shadow focus-within:ring-2 focus-within:ring-lime">
+    <form
+      role="search"
+      onSubmit={handleSubmit}
+      className="flex w-full max-w-[582px] items-start gap-3 sm:gap-4 lg:w-auto lg:max-w-none"
+    >
+      <label className="flex h-[52px] min-w-0 flex-1 items-center gap-2 rounded-xl bg-white px-6 py-3 transition-shadow focus-within:ring-2 focus-within:ring-lime lg:w-[461px] lg:flex-none">
         <Image src="/images/icons/search.svg" alt="" width={24} height={24} />
         <span className="sr-only">Search courses</span>
         <input

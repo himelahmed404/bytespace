@@ -20,6 +20,7 @@
   --color-gray-800: #424348;
   --color-ink: #242528; /* Shuttle Gray/950 */
   --color-canvas: #fafafa; /* off-white section background */
+  --color-danger: #d92d20; /* form errors */
   --color-navy: #040819; /* section headings */
 
   /* Neutrals — Black */
@@ -32,31 +33,36 @@
   --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-clash-display), var(--font-poppins), sans-serif;
 
-  /* Type scale — Figma text styles */
+  /*
+   * Type scale — Figma text styles.
+   * Line heights are Figma's *rendered* values: Figma rounds every line box to whole pixels
+   * (e.g. 18px × 160% = 28.8px is drawn as 29px lines), so using the rounded values makes text
+   * land on exactly the same pixels as the design instead of drifting a little on every line.
+   */
   --text-heading-l: 72px;
-  --text-heading-l--line-height: 1.2;
+  --text-heading-l--line-height: 86px; /* 120% */
   --text-heading-l--letter-spacing: -0.01em;
   --text-heading-m: 44px;
-  --text-heading-m--line-height: 1.2;
+  --text-heading-m--line-height: 53px; /* 120% */
   --text-heading-m--letter-spacing: -0.01em;
   --text-heading-s: 36px;
-  --text-heading-s--line-height: 1.2;
+  --text-heading-s--line-height: 43px; /* 120% */
   --text-heading-s--letter-spacing: -0.01em;
   --text-heading-xs: 20px;
   --text-heading-xs--line-height: 28px;
   --text-heading-xs--letter-spacing: -0.01em;
   --text-body-l: 18px;
-  --text-body-l--line-height: 1.6;
+  --text-body-l--line-height: 29px; /* 160% */
   --text-body-m: 16px;
-  --text-body-m--line-height: 1.6;
+  --text-body-m--line-height: 26px; /* 160% */
   --text-body-xs: 12px;
   --text-body-xs--line-height: 20px;
   --text-label-l: 18px;
-  --text-label-l--line-height: 1.2;
+  --text-label-l--line-height: 22px; /* 120% */
   --text-label-m: 16px;
-  --text-label-m--line-height: 1.2;
+  --text-label-m--line-height: 19px; /* 120% */
   --text-label-s: 14px;
-  --text-label-s--line-height: 1.2;
+  --text-label-s--line-height: 17px; /* 120% */
   --text-label-xs: 12px;
   --text-label-xs--line-height: 20px;
 
@@ -87,6 +93,29 @@
     }
   }
 
+  /*
+   * Page-load entrance for the hero text. Pure CSS (runs on the first paint, before React
+   * hydrates), so the headline — the page's LCP element — shows up immediately.
+   */
+  --animate-rise-in: rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--rise-delay, 0s) both;
+
+  @keyframes rise-in {
+    from {
+      /* Not 0: Chrome ignores fully transparent elements for LCP, which would delay it */
+      opacity: 0.01;
+      transform: translate3d(0, 28px, 0);
+    }
+  }
+
+  /* Partner-logo strip on smaller screens (the list is rendered twice for a seamless loop). */
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
   @keyframes float {
     0%,
     100% {
@@ -99,8 +128,10 @@
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -110,9 +141,26 @@
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-primary;
   }
+
+  /* The blue focus ring disappears on blue sections, so use lime there. */
+  .bg-primary :focus-visible {
+    @apply outline-lime;
+  }
 }
 
 /* Centered 1200px page container with side gutters on small screens */
 @utility container-page {
   @apply mx-auto w-full max-w-page px-4 sm:px-6 xl:px-0;
+}
+
+/*
+ * Scale a fixed-size design canvas (Figma coordinates) down to its container's width:
+ *   --fit = min(1, container width / canvas width)
+ * CSS can't divide two lengths yet; tan(atan2(a, b)) = a / b is the standard pure-CSS workaround.
+ * The canvas needs `--fit-w` (its design width) and an ancestor with `container-type`.
+ */
+@utility fit-scale {
+  /* +0.0001: floating-point tan() can land at 0.99999…, which would soften a 1:1 render */
+  --fit: min(1, tan(atan2(100cqw, var(--fit-w))) + 0.0001);
+  scale: var(--fit);
 }

@@ -21,7 +21,7 @@ export function Logo({ tone = "light", markOnly = false, className }: LogoProps)
       {!markOnly && (
         <span
           className={cn(
-            "mt-[5px] font-display text-[24px] leading-normal font-bold",
+            "mt-2 font-display text-[24px] leading-[29px] font-bold",
             tone === "light" ? "text-gray-50" : "text-ink",
           )}
         >

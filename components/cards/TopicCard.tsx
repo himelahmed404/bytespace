@@ -18,11 +18,11 @@ export function TopicCard({ title, courses, students, className }: TopicCardProp
     >
       <p className="text-label-m font-medium text-ink">{title}</p>
       <p className="flex items-start gap-2 text-gray-400">
-        <span className="text-[12px] leading-[1.6]">{courses}</span>
-        <span aria-hidden className="text-[10px] leading-[1.5]">
+        <span className="text-[12px] leading-[19px]">{courses}</span>
+        <span aria-hidden className="text-[10px] leading-[15px]">
           •
         </span>
-        <span className="text-[12px] leading-[1.6]">{students}</span>
+        <span className="text-[12px] leading-[19px]">{students}</span>
       </p>
     </div>
   );

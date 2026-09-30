@@ -7,6 +7,7 @@ import { FloatingCard } from "@/components/motion/FloatingCard";
 import { FloatingOrnament } from "@/components/motion/FloatingOrnament";
 import { Reveal } from "@/components/motion/Reveal";
 import { CountUp } from "@/components/ui/CountUp";
+import { FitToWidth } from "@/components/ui/FitToWidth";
 import { GlowBlob } from "@/components/ui/GlowBlob";
 import { ORNAMENT_TINT } from "@/components/ui/Ornament";
 import { courses, creatorBenefits, platformStats } from "@/lib/data";
@@ -25,18 +26,18 @@ const glows = [
 /** Learner pitch (stats) + creator pitch (revenue, benefits), on a glowing off-white background. */
 export function GrowthFeatures() {
   return (
-    <section className="relative isolate overflow-hidden bg-canvas py-[120px]">
+    <section className="relative isolate overflow-hidden bg-canvas py-20 xl:py-[120px]">
       <div className="pointer-events-none absolute inset-y-0 left-[calc(50%-720px)] w-[1440px]">
         {glows.map((g, i) => (
           <GlowBlob key={i} {...g} />
         ))}
       </div>
 
-      <div className="relative container-page flex flex-col gap-[72px] pl-px">
+      <div className="relative container-page flex flex-col gap-20 xl:gap-[72px] xl:pl-px">
         {/* ── Learners ─────────────────────────────────────────────── */}
-        <div className="flex items-center gap-[63px]">
-          <Reveal className="flex w-[574px] shrink-0 flex-col gap-10">
-            <h2 className="max-w-[577px] font-heading text-heading-m font-semibold text-ink">
+        <div className="flex flex-col items-center gap-12 xl:flex-row xl:gap-[63px]">
+          <Reveal className="flex w-full flex-col gap-8 sm:gap-10 xl:w-[574px] xl:shrink-0">
+            <h2 className="max-w-[577px] font-heading text-[30px]/9 font-semibold tracking-[-0.01em] text-ink max-lg:text-balance sm:text-[36px]/[43px] lg:text-heading-m">
               Your Path to Professional Growth Starts Here!
             </h2>
             <p className="max-w-[477px] text-body-l text-gray-700">
@@ -45,7 +46,7 @@ export function GrowthFeatures() {
               gain industry expertise, or embark on a new career path entirely, we have the
               resources you need.
             </p>
-            <dl className="flex items-end gap-14">
+            <dl className="flex items-end gap-10 sm:gap-14">
               {platformStats.map((stat) => (
                 <div key={stat.label} className="flex flex-col">
                   <dt className="order-2 text-body-l text-gray-700">{stat.label}</dt>
@@ -57,7 +58,7 @@ export function GrowthFeatures() {
             </dl>
           </Reveal>
 
-          <div className="relative h-[552px] w-[621px] shrink-0">
+          <FitToWidth width={621} height={552} className="xl:w-[621px] xl:shrink-0">
             <FloatingCard
               className="top-0 left-0"
               float={{ duration: 6.5, delay: 0.6, distance: -10 }}
@@ -91,12 +92,16 @@ export function GrowthFeatures() {
               enter={0.45}
               float={{ duration: 7, delay: 0.3, distance: -14, rotate: 4 }}
             />
-          </div>
+          </FitToWidth>
         </div>
 
         {/* ── Creators ─────────────────────────────────────────────── */}
-        <div id="creators" className="flex scroll-mt-8 items-center gap-[79px]">
-          <div className="relative h-[596px] w-[541px] shrink-0">
+        {/* Phones/tablets: text first, then the collage (hence column-reverse) */}
+        <div
+          id="creators"
+          className="flex scroll-mt-8 flex-col-reverse items-center gap-12 xl:flex-row xl:gap-[79px]"
+        >
+          <FitToWidth width={541} height={596} className="xl:w-[541px] xl:shrink-0">
             <FloatingCard
               className="top-11 left-0"
               float={{ duration: 5.5, delay: 0.3, distance: -10 }}
@@ -151,10 +156,10 @@ export function GrowthFeatures() {
               enterRotate={10}
               float={{ duration: 6.5, delay: 1, distance: -12, rotate: -4 }}
             />
-          </div>
+          </FitToWidth>
 
-          <Reveal className="flex w-[580px] shrink-0 flex-col gap-10">
-            <h2 className="max-w-[391px] font-heading text-heading-m font-semibold text-ink">
+          <Reveal className="flex w-full flex-col gap-8 sm:gap-10 xl:w-[580px] xl:shrink-0">
+            <h2 className="max-w-[391px] font-heading text-[30px]/9 font-semibold tracking-[-0.01em] text-ink max-lg:text-balance sm:text-[36px]/[43px] lg:text-heading-m">
               Create &amp; Manage Courses Easily.
             </h2>
             <p className="max-w-[574px] text-body-l leading-7 text-gray-700">
@@ -165,7 +170,7 @@ export function GrowthFeatures() {
               {creatorBenefits.map((benefit) => (
                 <li key={benefit} className="flex items-end gap-2">
                   <Image src="/images/icons/check-circle.svg" alt="" width={24} height={24} />
-                  <span className="text-[18px] leading-[1.2] font-medium text-ink">{benefit}</span>
+                  <span className="text-[18px] leading-[22px] font-medium text-ink">{benefit}</span>
                 </li>
               ))}
             </ul>

@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 /** "Discover Your Passion" — category filters and the course grid. */
 export function DiscoverCourses() {
   return (
-    <section id="courses" className="scroll-mt-8 pt-[72px]">
+    <section id="courses" className="scroll-mt-8 pt-16 md:pt-[72px]">
       <div className="container-page flex flex-col items-center">
         <Reveal>
           <SectionHeading

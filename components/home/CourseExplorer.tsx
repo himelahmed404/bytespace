@@ -30,21 +30,25 @@ export function CourseExplorer() {
         rows={categoryTabRows}
         active={active}
         onChange={setActive}
-        className="mt-[42px]"
+        className="mt-8 md:mt-[42px]"
       />
 
-      {/* Fixed min-height (two card rows) so filtering doesn't make the page jump */}
-      <div className="mt-[77px] min-h-[808px] w-full">
+      {/* Min-height of two card rows (desktop) so filtering doesn't make the page jump */}
+      <div className="mt-10 w-full md:mt-[77px] xl:min-h-[808px]">
         <div aria-live="polite" className="sr-only">
           {visible.length} {visible.length === 1 ? "course" : "courses"} in {active}
         </div>
 
-        <motion.ul layout className="grid grid-cols-[repeat(3,373px)] gap-10">
+        <motion.ul
+          layout
+          className="grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-[repeat(2,373px)] lg:justify-center lg:gap-10 xl:grid-cols-[repeat(3,373px)] xl:justify-start"
+        >
           <AnimatePresence mode="popLayout">
             {visible.map((course, i) => (
               <motion.li
                 key={course.id}
                 layout
+                className="flex w-full justify-center"
                 initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}

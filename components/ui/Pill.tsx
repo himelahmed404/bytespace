@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 type PillProps = {
   /** `glass`: frosted chip over images · `soft`: light gray chip on white. */
   variant?: "glass" | "soft";
-  /** `tight` (1.2) = 26px-tall chip · `relaxed` (20px) = 32px-tall chip. */
+  /** `tight` (14px) = 26px-tall chip · `relaxed` (20px) = 32px-tall chip. */
   lineHeight?: "tight" | "relaxed";
   icon?: ReactNode;
   children: ReactNode;
@@ -28,7 +28,7 @@ export function Pill({
     <span
       className={cn(
         "inline-flex items-center justify-center gap-1 rounded-xl px-3 py-1.5 text-center text-[12px] font-medium whitespace-nowrap",
-        lineHeight === "tight" ? "leading-[1.2]" : "leading-5",
+        lineHeight === "tight" ? "leading-[14px]" : "leading-5",
         variants[variant],
         className,
       )}

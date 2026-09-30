@@ -12,7 +12,7 @@ type AvatarStackProps = {
     label: string;
     /** Circle image behind the label (lime, dark…). */
     badgeSrc: string;
-    /** Label typography & color, e.g. "font-bold leading-[1.5] text-ink". */
+    /** Label typography & color, e.g. "font-bold leading-[18px] text-ink". */
     className: string;
   };
   /** Accessible description of the group, e.g. "2,000+ happy students". */

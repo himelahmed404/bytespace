@@ -39,7 +39,11 @@ export function CountUp({ value, suffix = "", duration = 1.6, className }: Count
   }, [inView, reduceMotion, value, suffix, duration]);
 
   return (
-    <span ref={ref} className={className} aria-label={`${value}${suffix}`}>
+    <span ref={ref} className={className}>
+      <span className="sr-only">
+        {value}
+        {suffix}
+      </span>
       <span ref={textRef} aria-hidden>
         {value}
         {suffix}

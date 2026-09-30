@@ -1,3 +1,4 @@
+import { SiteFooter } from "@/components/footer/SiteFooter";
 import { CreatorCta } from "@/components/home/CreatorCta";
 import { DiscoverCourses } from "@/components/home/DiscoverCourses";
 import { GrowthFeatures } from "@/components/home/GrowthFeatures";
@@ -8,14 +9,17 @@ import { Testimonials } from "@/components/home/Testimonials";
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <PartnerLogos />
-      <DiscoverCourses />
-      <LearningPaths />
-      <GrowthFeatures />
-      <CreatorCta />
-      <Testimonials />
-    </main>
+    <>
+      <main id="main">
+        <Hero />
+        <PartnerLogos />
+        <DiscoverCourses />
+        <LearningPaths />
+        <GrowthFeatures />
+        <CreatorCta />
+        <Testimonials />
+      </main>
+      <SiteFooter />
+    </>
   );
 }

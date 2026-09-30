@@ -25,11 +25,11 @@ export function HappyStudentsCard({ compact = false, className }: HappyStudentsC
         </p>
         <div className="flex items-center">
           {compact ? (
-            <p className="text-[10px] leading-[1.5] text-gray-400">
+            <p className="text-[10px] leading-[15px] text-gray-400">
               <span className="font-bold text-ink">4.5 </span>(240)
             </p>
           ) : (
-            <p className="text-[12px] leading-[1.6] text-gray-400">
+            <p className="text-[12px] leading-[19px] text-gray-400">
               <span className="text-ink">4.5 </span>(240)
             </p>
           )}
@@ -52,7 +52,7 @@ export function HappyStudentsCard({ compact = false, className }: HappyStudentsC
         more={{
           label: "2K+",
           badgeSrc: "/images/icons/badge-lime.svg",
-          className: "font-bold leading-[1.5] text-ink",
+          className: "font-bold leading-[18px] text-ink",
         }}
       />
     </div>

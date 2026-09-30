@@ -210,3 +210,53 @@ export const testimonials: Testimonial[] = [
       '"As a creator, ByteSpace has been a game-changer for me. The Course Editor is user-friendly, and the support from the community is incredible. It\'s fulfilling to see my courses making a positive impact on learners globally."',
   },
 ];
+
+/* ------------------------------------------------------------------------------------------ */
+/* Footer                                                                                      */
+/* ------------------------------------------------------------------------------------------ */
+
+export type FooterLink = {
+  label: string;
+  href: string;
+  /** When set, the link also opens the course grid on this category. */
+  courseCategory?: string;
+};
+
+export const footerColumns: { title: string; links: FooterLink[] }[] = [
+  {
+    title: "Browse",
+    links: [
+      { label: "Featured Courses", href: "#courses", courseCategory: FEATURED },
+      { label: "Featured Categories", href: "#categories" },
+      { label: "Business", href: "#courses", courseCategory: "Freelance & Entrepreneurship" },
+      { label: "IT", href: "#courses", courseCategory: "Data Science" },
+      { label: "Design", href: "#courses", courseCategory: "UI/UX Design" },
+    ],
+  },
+  {
+    title: "Categories",
+    links: [
+      { label: "Development", href: "#courses", courseCategory: "Web Development" },
+      { label: "Marketing", href: "#courses", courseCategory: "Marketing" },
+      { label: "Photography", href: "#courses", courseCategory: "Photography" },
+      { label: "Finance", href: "#courses", courseCategory: "Freelance & Entrepreneurship" },
+      { label: "Sport", href: "#categories" },
+    ],
+  },
+  {
+    title: "Platform",
+    links: [
+      { label: "Become a Creator", href: "/register" },
+      { label: "Affiliate Program", href: "#" },
+      { label: "Contact", href: "#" },
+      { label: "Help", href: "#" },
+      { label: "About", href: "#" },
+    ],
+  },
+];
+
+export const legalLinks: FooterLink[] = [
+  { label: "Privacy Policy", href: "#" },
+  { label: "Terms of Service", href: "#" },
+  { label: "Cookies Settings", href: "#" },
+];

@@ -20,10 +20,17 @@ export function CategoryTabs({ rows, active, onChange, className }: CategoryTabs
     <div
       role="group"
       aria-label="Filter courses by category"
-      className={cn("flex flex-col gap-[21px]", className)}
+      className={cn(
+        // Phones: one swipeable row · ≥768px: the three centered rows from the design
+        "-mx-4 flex w-[calc(100%+2rem)] [scrollbar-width:none] gap-3 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:w-[calc(100%+3rem)] sm:px-6 md:mx-0 md:w-auto md:flex-col md:gap-[21px] md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden",
+        className,
+      )}
     >
       {rows.map((row, rowIndex) => (
-        <div key={rowIndex} className="flex flex-wrap items-center justify-center gap-4">
+        <div
+          key={rowIndex}
+          className="flex shrink-0 items-center gap-3 md:flex-wrap md:justify-center md:gap-4"
+        >
           {row.map((category) => {
             const isActive = category === active;
             return (
@@ -53,7 +60,7 @@ export function CategoryTabs({ rows, active, onChange, className }: CategoryTabs
           {rowIndex === rows.length - 1 && (
             <Link
               href="#categories"
-              className="text-label-m font-medium text-primary transition-opacity hover:opacity-70"
+              className="shrink-0 text-label-m font-medium whitespace-nowrap text-primary transition-opacity hover:opacity-70"
             >
               + More
             </Link>
