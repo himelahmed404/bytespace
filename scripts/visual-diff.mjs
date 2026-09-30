@@ -63,9 +63,9 @@ await page.addStyleTag({
 await page.evaluate(() => document.fonts.ready);
 // Scroll through the page so every scroll-triggered reveal runs, then let them settle.
 await page.evaluate(async () => {
-  for (let y = 0; y < document.body.scrollHeight; y += 400) {
+  for (let y = 0; y < document.body.scrollHeight; y += 300) {
     window.scrollTo(0, y);
-    await new Promise((r) => setTimeout(r, 60));
+    await new Promise((r) => setTimeout(r, 150));
   }
   window.scrollTo(0, 0);
 });

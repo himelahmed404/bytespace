@@ -35,7 +35,11 @@ export function HappyStudentsCard({ className }: { className?: string }) {
         size={43}
         overlap={16}
         label="Over 2,000 happy students"
-        more={{ label: "2K+", badgeSrc: "/images/icons/badge-lime.svg", className: "text-ink" }}
+        more={{
+          label: "2K+",
+          badgeSrc: "/images/icons/badge-lime.svg",
+          className: "font-bold leading-[1.5] text-ink",
+        }}
       />
     </div>
   );

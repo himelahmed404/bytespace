@@ -19,7 +19,7 @@ export function Pill({ variant = "soft", icon, children, className }: PillProps)
   return (
     <span
       className={cn(
-        "inline-flex items-center justify-center gap-1 rounded-xl px-3 py-1.5 text-center text-label-xs font-medium whitespace-nowrap",
+        "inline-flex items-center justify-center gap-1 rounded-xl px-3 py-1.5 text-center text-[12px] leading-[1.2] font-medium whitespace-nowrap",
         variants[variant],
         className,
       )}

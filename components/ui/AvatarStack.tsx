@@ -12,7 +12,8 @@ type AvatarStackProps = {
     label: string;
     /** Circle image behind the label (lime, dark…). */
     badgeSrc: string;
-    className?: string;
+    /** Label typography & color, e.g. "font-bold leading-[1.5] text-ink". */
+    className: string;
   };
   /** Accessible description of the group, e.g. "2,000+ happy students". */
   label: string;
@@ -30,8 +31,8 @@ export function AvatarStack({ avatars, size, overlap, more, label, className }: 
           alt=""
           width={size}
           height={size}
-          className="shrink-0 rounded-full"
-          style={{ marginRight: -overlap }}
+          className="shrink-0 rounded-full object-cover"
+          style={{ width: size, height: size, marginRight: -overlap }}
         />
       ))}
       {more && (
@@ -46,9 +47,7 @@ export function AvatarStack({ avatars, size, overlap, more, label, className }: 
             height={size}
             className="absolute inset-0"
           />
-          <span className={cn("relative text-[12px] leading-[1.5] font-bold", more.className)}>
-            {more.label}
-          </span>
+          <span className={cn("relative text-[12px]", more.className)}>{more.label}</span>
         </span>
       )}
     </div>
