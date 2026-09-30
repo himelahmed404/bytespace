@@ -8,16 +8,21 @@
   /* Brand */
   --color-primary: #003be2; /* Persian Blue/800 */
   --color-lime: #d4fb20; /* Electric Lime/400 */
+  --color-chartreuse: #cbfc01; /* brighter lime: hero ring, revenue badges, glow blobs */
   --color-violet-950: #300b6a; /* Electric Violet/950 */
 
   /* Neutrals — Shuttle Gray */
   --color-gray-50: #f5f5f6;
   --color-gray-100: #e5e6e8;
   --color-gray-200: #ced0d3;
-  --color-gray-400: #82868e;
+  /* Figma uses #82868e; darkened slightly (same hue) to meet WCAG AA contrast (4.75:1 on white) */
+  --color-gray-400: #70737a;
   --color-gray-700: #4b4c53;
   --color-gray-800: #424348;
   --color-ink: #242528; /* Shuttle Gray/950 */
+  --color-canvas: #fafafa; /* off-white section background */
+  --color-danger: #d92d20; /* form errors */
+  --color-navy: #040819; /* section headings */
 
   /* Neutrals — Black */
   --color-black-200: #d1d1d1;
@@ -29,23 +34,36 @@
   --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-clash-display), var(--font-poppins), sans-serif;
 
-  /* Type scale — Figma text styles */
+  /*
+   * Type scale — Figma text styles.
+   * Line heights are Figma's *rendered* values: Figma rounds every line box to whole pixels
+   * (e.g. 18px × 160% = 28.8px is drawn as 29px lines), so using the rounded values makes text
+   * land on exactly the same pixels as the design instead of drifting a little on every line.
+   */
+  --text-heading-l: 72px;
+  --text-heading-l--line-height: 86px; /* 120% */
+  --text-heading-l--letter-spacing: -0.01em;
   --text-heading-m: 44px;
-  --text-heading-m--line-height: 1.2;
+  --text-heading-m--line-height: 53px; /* 120% */
   --text-heading-m--letter-spacing: -0.01em;
+  --text-heading-s: 36px;
+  --text-heading-s--line-height: 43px; /* 120% */
+  --text-heading-s--letter-spacing: -0.01em;
   --text-heading-xs: 20px;
   --text-heading-xs--line-height: 28px;
   --text-heading-xs--letter-spacing: -0.01em;
   --text-body-l: 18px;
-  --text-body-l--line-height: 1.6;
+  --text-body-l--line-height: 29px; /* 160% */
   --text-body-m: 16px;
-  --text-body-m--line-height: 1.6;
+  --text-body-m--line-height: 26px; /* 160% */
   --text-body-xs: 12px;
   --text-body-xs--line-height: 20px;
   --text-label-l: 18px;
-  --text-label-l--line-height: 1.2;
+  --text-label-l--line-height: 22px; /* 120% */
+  --text-label-m: 16px;
+  --text-label-m--line-height: 19px; /* 120% */
   --text-label-s: 14px;
-  --text-label-s--line-height: 1.2;
+  --text-label-s--line-height: 17px; /* 120% */
   --text-label-xs: 12px;
   --text-label-xs--line-height: 20px;
 
@@ -56,11 +74,83 @@
 
   /* Layout */
   --container-page: 1200px;
+
+  /* Gentle floating loop for 3D ornaments and cards. Tuned per element via CSS variables
+     (see components/motion/Float.tsx). */
+  --animate-float: float var(--float-duration, 6s) ease-in-out var(--float-delay, 0s) infinite;
+  /* Runs in sync with `float`: the shadow shrinks and fades as the object rises (3D depth cue). */
+  --animate-float-shadow: float-shadow var(--float-duration, 6s) ease-in-out var(--float-delay, 0s)
+    infinite;
+
+  @keyframes float-shadow {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(0.84);
+      opacity: 0.55;
+    }
+  }
+
+  /*
+   * Page-load entrance for the hero text. Pure CSS (runs on the first paint, before React
+   * hydrates), so the headline — the page's LCP element — shows up immediately.
+   */
+  --animate-rise-in: rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--rise-delay, 0s) both;
+
+  @keyframes rise-in {
+    from {
+      /* Not 0: Chrome ignores fully transparent elements for LCP, which would delay it */
+      opacity: 0.01;
+      transform: translate3d(0, 28px, 0);
+    }
+  }
+
+  /* Breathing lime glow on the search button once it has merged into the bar (box-shadow only,
+     so it never fights the button's own motion transforms). */
+  --animate-glow-pulse: glow-pulse 1.8s ease-in-out infinite;
+
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 0 rgb(212 251 32 / 0.55),
+        0 0 14px 2px rgb(212 251 32 / 0.35);
+    }
+    50% {
+      box-shadow:
+        0 0 0 7px rgb(212 251 32 / 0),
+        0 0 26px 8px rgb(212 251 32 / 0.6);
+    }
+  }
+
+  /* Partner-logo strip on smaller screens (the list is rendered twice for a seamless loop). */
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate3d(0, var(--float-y, -14px), 0) rotate(var(--float-rotate, 0deg));
+    }
+  }
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -70,9 +160,26 @@
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-primary;
   }
+
+  /* The blue focus ring disappears on blue sections, so use lime there. */
+  .bg-primary :focus-visible {
+    @apply outline-lime;
+  }
 }
 
 /* Centered 1200px page container with side gutters on small screens */
 @utility container-page {
   @apply mx-auto w-full max-w-page px-4 sm:px-6 xl:px-0;
+}
+
+/*
+ * Scale a fixed-size design canvas (Figma coordinates) down to its container's width:
+ *   --fit = min(1, container width / canvas width)
+ * CSS can't divide two lengths yet; tan(atan2(a, b)) = a / b is the standard pure-CSS workaround.
+ * The canvas needs `--fit-w` (its design width) and an ancestor with `container-type`.
+ */
+@utility fit-scale {
+  /* +0.0001: floating-point tan() can land at 0.99999…, which would soften a 1:1 render */
+  --fit: min(1, tan(atan2(100cqw, var(--fit-w))) + 0.0001);
+  scale: var(--fit);
 }

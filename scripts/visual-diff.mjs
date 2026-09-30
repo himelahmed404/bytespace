@@ -31,6 +31,7 @@ const { values } = parseArgs({
     name: { type: "string", default: "diff" },
     width: { type: "string", default: "1440" },
     threshold: { type: "string", default: "0.1" },
+    wait: { type: "string", default: "3000" },
   },
 });
 
@@ -55,12 +56,20 @@ const context = await browser.newContext({
   reducedMotion: "reduce",
 });
 const page = await context.newPage();
-await page.goto(values.url, { waitUntil: "networkidle" });
+await page.goto(values.url, { waitUntil: "load" });
 await page.addStyleTag({
   content: "*,*::before,*::after{animation:none!important;transition:none!important}",
 });
 await page.evaluate(() => document.fonts.ready);
-await page.waitForTimeout(500);
+// Scroll through the page so every scroll-triggered reveal runs, then let them settle.
+await page.evaluate(async () => {
+  for (let y = 0; y < document.body.scrollHeight; y += 300) {
+    window.scrollTo(0, y);
+    await new Promise((r) => setTimeout(r, 150));
+  }
+  window.scrollTo(0, 0);
+});
+await page.waitForTimeout(Number(values.wait));
 await page.screenshot({ path: file("site"), clip, fullPage: true });
 await browser.close();
 
