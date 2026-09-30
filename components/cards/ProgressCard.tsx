@@ -5,11 +5,18 @@ type ProgressCardProps = {
   label?: string;
   /** Percentage, 0–100. */
   value: number;
+  /** Extra classes for the label, e.g. `leading-6` (the Growth section uses a taller line). */
+  labelClassName?: string;
   className?: string;
 };
 
 /** White stat card with a big percentage and an animated progress bar. */
-export function ProgressCard({ label = "Learning Progress", value, className }: ProgressCardProps) {
+export function ProgressCard({
+  label = "Learning Progress",
+  value,
+  labelClassName,
+  className,
+}: ProgressCardProps) {
   return (
     <div
       className={cn(
@@ -17,7 +24,7 @@ export function ProgressCard({ label = "Learning Progress", value, className }: 
         className,
       )}
     >
-      <p className="text-label-s font-medium text-ink">{label}</p>
+      <p className={cn("text-label-s font-medium text-ink", labelClassName)}>{label}</p>
       <p className="w-[200px] font-heading text-[48px] leading-[1.2] font-semibold tracking-[-0.01em] text-ink">
         {value}%
       </p>

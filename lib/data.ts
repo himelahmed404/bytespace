@@ -163,3 +163,20 @@ export const learningPaths: LearningPath[] = [
     courseCategory: "Photography",
   },
 ];
+
+/* ------------------------------------------------------------------------------------------ */
+/* Growth & creators                                                                           */
+/* ------------------------------------------------------------------------------------------ */
+
+export const platformStats = [
+  { value: 12, suffix: "K", label: "Students" },
+  { value: 70, suffix: "+", label: "Courses" },
+  { value: 16, suffix: "", label: "Creators" },
+];
+
+export const creatorBenefits = [
+  "Share Your Expertise",
+  "Monetize Your Passion",
+  "Flexibility and Autonomy",
+  "Build a Community",
+];

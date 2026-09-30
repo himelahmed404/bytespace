@@ -4,8 +4,14 @@ import { cn } from "@/lib/cn";
 
 const avatars = Array.from({ length: 7 }, (_, i) => `/images/avatars/student-${i + 1}.png`);
 
+type HappyStudentsCardProps = {
+  /** Smaller rating line (10px, bold score) and a taller title line — used below the hero. */
+  compact?: boolean;
+  className?: string;
+};
+
 /** "Happy Students" social-proof card: rating + stack of student avatars. */
-export function HappyStudentsCard({ className }: { className?: string }) {
+export function HappyStudentsCard({ compact = false, className }: HappyStudentsCardProps) {
   return (
     <div
       className={cn(
@@ -14,11 +20,19 @@ export function HappyStudentsCard({ className }: { className?: string }) {
       )}
     >
       <div className="flex flex-col items-start">
-        <p className="text-label-m font-medium text-ink">Happy Students</p>
+        <p className={cn("text-label-m font-medium text-ink", compact && "leading-6")}>
+          Happy Students
+        </p>
         <div className="flex items-center">
-          <p className="text-[12px] leading-[1.6] text-gray-400">
-            <span className="text-ink">4.5 </span>(240)
-          </p>
+          {compact ? (
+            <p className="text-[10px] leading-[1.5] text-gray-400">
+              <span className="font-bold text-ink">4.5 </span>(240)
+            </p>
+          ) : (
+            <p className="text-[12px] leading-[1.6] text-gray-400">
+              <span className="text-ink">4.5 </span>(240)
+            </p>
+          )}
           <span className="relative size-4">
             <Image
               src="/images/icons/star.svg"

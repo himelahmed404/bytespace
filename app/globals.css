@@ -8,6 +8,7 @@
   /* Brand */
   --color-primary: #003be2; /* Persian Blue/800 */
   --color-lime: #d4fb20; /* Electric Lime/400 */
+  --color-chartreuse: #cbfc01; /* brighter lime: hero ring, revenue badges, glow blobs */
   --color-violet-950: #300b6a; /* Electric Violet/950 */
 
   /* Neutrals — Shuttle Gray */
@@ -18,6 +19,7 @@
   --color-gray-700: #4b4c53;
   --color-gray-800: #424348;
   --color-ink: #242528; /* Shuttle Gray/950 */
+  --color-canvas: #fafafa; /* off-white section background */
   --color-navy: #040819; /* section headings */
 
   /* Neutrals — Black */

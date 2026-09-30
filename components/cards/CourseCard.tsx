@@ -6,11 +6,38 @@ import { courseStudents, type Course } from "@/lib/data";
 
 type CourseCardProps = {
   course: Course;
+  /**
+   * `grid`: the course list (26px chips, gray star, lime "26+").
+   * `showcase`: the version floating in the Growth section and auth pages (32px chips, taller
+   * title line, lime star, black "26+"). Both are straight from the Figma file.
+   */
+  variant?: "grid" | "showcase";
   className?: string;
 };
 
+const styles = {
+  grid: {
+    chips: "tight",
+    title: "leading-[1.2]",
+    meta: "leading-[1.6]",
+    badge: { src: "/images/icons/badge-lime.svg", className: "font-medium leading-5 text-ink" },
+    rating: "font-normal leading-[1.6]",
+    star: "/images/icons/star-outline.svg",
+  },
+  showcase: {
+    chips: "relaxed",
+    title: "leading-[1.4]",
+    meta: "leading-5",
+    badge: { src: "/images/icons/badge-black.svg", className: "font-medium leading-5 text-white" },
+    rating: "font-medium leading-7",
+    star: "/images/icons/star-lime.svg",
+  },
+} as const;
+
 /** 373×384 course card: thumbnail with meta chips, title, author, level, students, price, rating. */
-export function CourseCard({ course, className }: CourseCardProps) {
+export function CourseCard({ course, variant = "grid", className }: CourseCardProps) {
+  const s = styles[variant];
+
   return (
     <article
       className={cn(
@@ -18,7 +45,7 @@ export function CourseCard({ course, className }: CourseCardProps) {
         className,
       )}
     >
-      <div className="relative h-[195.14px] overflow-hidden rounded-md bg-[#443131]">
+      <div className="relative h-[195.14px] shrink-0 overflow-hidden rounded-md bg-[#443131]">
         <Image
           src={course.thumbnail}
           alt=""
@@ -28,13 +55,19 @@ export function CourseCard({ course, className }: CourseCardProps) {
         />
         <ul className="absolute top-[150px] left-[13px] flex gap-3">
           <li>
-            <Pill variant="glass">{course.lessons} Lessons</Pill>
+            <Pill variant="glass" lineHeight={s.chips}>
+              {course.lessons} Lessons
+            </Pill>
           </li>
           <li>
-            <Pill variant="glass">{course.duration}</Pill>
+            <Pill variant="glass" lineHeight={s.chips}>
+              {course.duration}
+            </Pill>
           </li>
           <li>
-            <Pill variant="glass">{course.comments} Comments</Pill>
+            <Pill variant="glass" lineHeight={s.chips}>
+              {course.comments} Comments
+            </Pill>
           </li>
         </ul>
       </div>
@@ -44,17 +77,23 @@ export function CourseCard({ course, className }: CourseCardProps) {
           <div>
             <h3
               title={course.title}
-              className="max-w-[280px] truncate font-heading text-[20px] leading-[1.2] font-semibold tracking-[-0.01em] text-black"
+              className={cn(
+                "max-w-[280px] truncate font-heading text-[20px] font-semibold tracking-[-0.01em] text-black",
+                s.title,
+              )}
             >
               {course.title}
             </h3>
-            <p className="text-[12px] leading-[1.6] text-black-700">
+            <p className={cn("text-[12px] text-black-700", s.meta)}>
               by <span className="text-primary">{course.author}</span>
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <Pill icon={<Image src="/images/icons/signal.svg" alt="" width={20} height={20} />}>
+            <Pill
+              lineHeight={s.chips}
+              icon={<Image src="/images/icons/signal.svg" alt="" width={20} height={20} />}
+            >
               {course.level}
             </Pill>
             <AvatarStack
@@ -64,24 +103,36 @@ export function CourseCard({ course, className }: CourseCardProps) {
               label={`${courseStudents.length + course.moreStudents}+ students enrolled`}
               more={{
                 label: `${course.moreStudents}+`,
-                badgeSrc: "/images/icons/badge-lime.svg",
-                className: "font-medium leading-5 text-ink",
+                badgeSrc: s.badge.src,
+                className: s.badge.className,
               }}
             />
           </div>
 
           <p className="flex items-end">
-            <span className="font-heading text-[20px] leading-[1.2] font-semibold tracking-[-0.01em] text-primary">
-              ${course.price}
+            <span
+              className={cn(
+                // 24px row in both variants, as in Figma (keeps the card at exactly 384px)
+                "font-heading text-[20px] leading-6 font-semibold tracking-[-0.01em] text-primary",
+              )}
+            >
+              {variant === "showcase" ? (
+                <>
+                  <span className="font-medium">$</span>
+                  {course.price}
+                </>
+              ) : (
+                `$${course.price}`
+              )}
             </span>
-            <span className="text-[12px] leading-[1.6] text-black-700">/lifetime</span>
+            <span className={cn("text-[12px] text-black-700", s.meta)}>/lifetime</span>
           </p>
         </div>
 
-        <p className="flex items-center text-[18px] leading-[1.6] text-black-700">
+        <p className={cn("flex items-center text-[18px] text-black-700", s.rating)}>
           <span className="sr-only">Rated </span>
           {course.rating}&nbsp;
-          <Image src="/images/icons/star-outline.svg" alt="" width={24} height={24} />
+          <Image src={s.star} alt="" width={24} height={24} />
         </p>
       </div>
     </article>

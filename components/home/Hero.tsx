@@ -1,32 +1,19 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
 import { HappyStudentsCard } from "@/components/cards/HappyStudentsCard";
 import { ProgressCard } from "@/components/cards/ProgressCard";
 import { TopicCard } from "@/components/cards/TopicCard";
 import { HeroSearch } from "@/components/home/HeroSearch";
-import { Float } from "@/components/motion/Float";
+import { FloatingCard } from "@/components/motion/FloatingCard";
+import { FloatingOrnament, type FloatingOrnamentProps } from "@/components/motion/FloatingOrnament";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/SiteHeader";
-import { CardShadow } from "@/components/ui/CardShadow";
 import { GridBackground } from "@/components/ui/GridBackground";
-import { Ornament, OrnamentShadow, type OrnamentShape } from "@/components/ui/Ornament";
-import { cn } from "@/lib/cn";
+import { ORNAMENT_TINT } from "@/components/ui/Ornament";
 
-const LIME = "var(--color-lime)";
-const WHITE = "var(--color-gray-50)";
+const { lime: LIME, white: WHITE } = ORNAMENT_TINT;
 
 /** 3D ornaments, positioned on the 1440×1024 Figma frame (x/y/size in px). */
-const ornaments: Array<{
-  shape: OrnamentShape;
-  tint: string;
-  x: number;
-  y: number;
-  size: number;
-  flip?: boolean;
-  /** Seconds before it rises into place on page load. */
-  enter: number;
-  float: { duration: number; delay: number; distance: number; rotate: number };
-}> = [
+const ornaments: Array<Omit<FloatingOrnamentProps, "trigger" | "className">> = [
   {
     shape: "coil",
     enter: 0.85,
@@ -84,31 +71,6 @@ const ornaments: Array<{
   },
 ];
 
-type FloatingCardProps = {
-  className: string;
-  /** Seconds before it rises into place on page load. */
-  enter: number;
-  float: { duration: number; delay?: number; distance: number };
-  children: ReactNode;
-};
-
-/** A hero card that rises in from below, then floats with a soft shadow underneath. */
-function FloatingCard({ className, enter, float, children }: FloatingCardProps) {
-  return (
-    <Reveal
-      className={cn("absolute", className)}
-      trigger="mount"
-      y={120}
-      delay={enter}
-      duration={1.3}
-    >
-      <Float {...float} shadow={<CardShadow />}>
-        {children}
-      </Float>
-    </Reveal>
-  );
-}
-
 export function Hero() {
   return (
     <section className="relative isolate h-[1024px] overflow-hidden bg-primary">
@@ -153,6 +115,7 @@ export function Hero() {
         </Reveal>
 
         <FloatingCard
+          trigger="mount"
           className="top-[651px] left-[842px] z-30"
           enter={1}
           float={{ duration: 5, delay: 0.4, distance: -10 }}
@@ -161,6 +124,7 @@ export function Hero() {
         </FloatingCard>
 
         <FloatingCard
+          trigger="mount"
           className="top-[837px] left-[328px] z-30"
           enter={1.1}
           float={{ duration: 5.5, delay: 1.2, distance: -10 }}
@@ -169,26 +133,17 @@ export function Hero() {
         </FloatingCard>
 
         {ornaments.map((o, i) => (
-          <Reveal
+          <FloatingOrnament
             key={`${o.shape}-${i}`}
-            className="absolute z-40"
-            style={{ left: o.x, top: o.y }}
+            {...o}
+            enterRotate={i % 2 ? 10 : -10}
             trigger="mount"
-            y={160}
-            rotate={i % 2 ? 10 : -10}
-            delay={o.enter}
-            duration={1.6}
-          >
-            <Float
-              {...o.float}
-              shadow={<OrnamentShadow shape={o.shape} size={o.size} flip={o.flip} />}
-            >
-              <Ornament shape={o.shape} tint={o.tint} size={o.size} flip={o.flip} />
-            </Float>
-          </Reveal>
+            className="z-40"
+          />
         ))}
 
         <FloatingCard
+          trigger="mount"
           className="top-[639px] left-[404px] z-50"
           enter={0.9}
           float={{ duration: 6, distance: -8 }}

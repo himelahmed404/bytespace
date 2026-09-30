@@ -3,6 +3,12 @@ import { cn } from "@/lib/cn";
 
 export type OrnamentShape = "zigzag" | "coil" | "torus" | "cylinder" | "pyramid";
 
+/** Tints used across the site. */
+export const ORNAMENT_TINT = {
+  lime: "var(--color-lime)",
+  white: "var(--color-gray-50)",
+} as const;
+
 type OrnamentProps = {
   shape: OrnamentShape;
   /** Tint color blended over the gray 3D render (e.g. lime or off-white). */
