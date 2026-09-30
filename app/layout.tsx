@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { MotionProvider } from "@/components/motion/MotionProvider";
+import { ShadowFilters } from "@/components/ui/ShadowFilters";
 import { clashDisplay, poppins, satoshi } from "./fonts";
 import "./globals.css";
 
@@ -11,7 +13,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${satoshi.variable} ${poppins.variable} ${clashDisplay.variable}`}>
-      <body>{children}</body>
+      <body>
+        <ShadowFilters />
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }
