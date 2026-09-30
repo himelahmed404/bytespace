@@ -1,44 +1,42 @@
-// Temporary M0 page: checks that design tokens and fonts load correctly.
-// Replaced by the real landing page sections from M1 onwards.
-
-const swatches = [
-  ["primary", "bg-primary"],
-  ["lime", "bg-lime"],
-  ["ink", "bg-ink"],
-  ["gray-700", "bg-gray-700"],
-  ["gray-400", "bg-gray-400"],
-  ["gray-200", "bg-gray-200"],
-  ["gray-100", "bg-gray-100"],
-  ["gray-50", "bg-gray-50"],
-] as const;
+// Temporary M1 preview: header on the blue grid + shared UI components.
+// The hero section replaces the blue block in M2, and the preview block is removed.
+import { SiteHeader } from "@/components/SiteHeader";
+import { Button } from "@/components/ui/Button";
+import { GridBackground } from "@/components/ui/GridBackground";
+import { Logo } from "@/components/ui/Logo";
+import { Pill } from "@/components/ui/Pill";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export default function Home() {
   return (
-    <main className="container-page flex flex-col gap-10 py-20">
-      <p className="font-display text-[24px] font-bold text-primary">ByteSpace</p>
+    <main>
+      <section className="relative h-[1024px] overflow-hidden bg-primary">
+        <GridBackground />
+        <SiteHeader />
+      </section>
 
-      <div className="flex flex-col gap-2">
-        <p className="text-body-l text-primary">Design tokens</p>
-        <h1 className="font-heading text-heading-m font-semibold">
-          Heading M — Poppins SemiBold 44
-        </h1>
-        <h2 className="font-heading text-heading-xs font-semibold">
-          Heading XS — Poppins SemiBold 20
-        </h2>
-        <p className="text-body-l">Body L — Satoshi Regular 18</p>
-        <p className="text-body-m">Body M — Satoshi Regular 16</p>
-        <p className="text-label-s font-medium">Label S — Satoshi Medium 14</p>
-        <p className="text-label-xs font-medium">Label XS — Satoshi Medium 12</p>
-      </div>
+      <section className="container-page flex flex-col gap-16 py-20">
+        <SectionHeading
+          title="Discover Your Passion, Build Your Skills"
+          titleClassName="max-w-[588px]"
+          description="At Bytespace Courses, we bring you closer to life-changing knowledge. Explore a variety of courses across different fields, from technology to the arts, and make a difference in your career and life."
+        />
+        <SectionHeading
+          size="s"
+          title="Explore Diverse Learning Paths at Bytespace"
+          description="At Bytespace, we believe in empowering individuals through knowledge. Our diverse range of courses spans various fields, ensuring there's something for everyone. Unleash your potential and explore our carefully curated categories."
+        />
 
-      <div className="flex flex-wrap gap-4">
-        {swatches.map(([name, cls]) => (
-          <div key={name} className="flex flex-col items-center gap-2">
-            <div className={`size-16 rounded-xl border border-gray-100 ${cls}`} />
-            <span className="text-label-xs">{name}</span>
+        <div className="flex flex-wrap items-center gap-6">
+          <Button>Sign In</Button>
+          <Button href="/register">Join as Creator</Button>
+          <Pill>Beginner</Pill>
+          <div className="rounded-md bg-ink p-3">
+            <Pill variant="glass">17 Lessons</Pill>
           </div>
-        ))}
-      </div>
+          <Logo tone="dark" />
+        </div>
+      </section>
     </main>
   );
 }
